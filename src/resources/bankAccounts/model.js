@@ -43,10 +43,22 @@ function BankAccount() {
       .error;
   }
 
+  function getAccountsWithTransactions(id, callback) {
+    const getAccountsWithTransactionsSql = `
+    SELECT * FROM bankAccount
+    WHERE accountnumber = ${id};
+    SELECT * FROM transactions
+    WHERE accountnumber = ${id};`;
+
+    dbClient
+      .query(getAccountsWithTransactionsSql)
+      .then((result) => callback(result)).catch.error;
+  }
+
   createTable();
   mockData();
 
-  return { getAllAccounts };
+  return { getAllAccounts, getAccountsWithTransactions };
 }
 
 module.exports = BankAccount;
