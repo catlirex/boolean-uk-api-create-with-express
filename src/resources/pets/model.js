@@ -4,6 +4,7 @@ const { buildAnimalDatabase } = require("../../utils/mockData");
 function Pet() {
   function createTable() {
     const sql = `
+    DROP TABLE IF EXISTS pets;   
       CREATE TABLE IF NOT EXISTS pets (
         id        SERIAL        PRIMARY KEY,
         name      VARCHAR(255)   NOT NULL,
@@ -31,17 +32,17 @@ function Pet() {
     const pets = buildAnimalDatabase();
 
     pets.forEach((pet) => {
-      db.query(createPet, Object.values(pet));
+      dbClient.query(createPet, Object.values(pet));
     });
   }
 
   function getAllPets(callback) {
-    const getAllBookSql = `
+    const getAllPetSql = `
     SELECT * FROM pets;
     `;
 
     dbClient
-      .query(getAllBookSql)
+      .query(getAllPetSql)
       .then((result) => callback(result))
       .catch((error) => console.log(error));
   }
@@ -70,7 +71,7 @@ function Pet() {
   }
 
   createTable();
-  // mockData();
+  mockData();
 
   return { getAllPets, createOnePet, getPetById };
 }

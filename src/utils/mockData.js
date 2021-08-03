@@ -13,7 +13,7 @@ function buildAnimalDatabase() {
     snake: faker.animal.snake,
     horse: faker.animal.horse,
     bird: faker.animal.bird,
-    rabbit: faker.animal.rabbit
+    rabbit: faker.animal.rabbit,
   };
 
   const animalTypes = Object.keys(animalBreedsGenerators);
@@ -37,7 +37,7 @@ function buildAnimalDatabase() {
           age: getRandomInt(1, 20),
           type,
           breed,
-          microchip: boolean[booelanIndex]
+          microchip: boolean[booelanIndex],
         };
 
         animals.push(newAnimal);
@@ -83,7 +83,7 @@ function buildBooksDatabase() {
     "western",
     "science fiction",
     "dystopian",
-    "horror"
+    "horror",
   ];
 
   const nonFictionTopics = [
@@ -94,7 +94,7 @@ function buildBooksDatabase() {
     "self-help",
     "how to manual",
     "business",
-    "humour"
+    "humour",
   ];
 
   const books = [];
@@ -116,7 +116,7 @@ function buildBooksDatabase() {
         type: "Fiction",
         author,
         topic,
-        publicationDate: randomDate
+        publicationDate: randomDate,
       };
 
       books.push(newBook);
@@ -140,7 +140,7 @@ function buildBooksDatabase() {
         type: "Non-Fiction",
         author,
         topic,
-        publicationDate: randomDate
+        publicationDate: randomDate,
       };
 
       books.push(newBook);
@@ -150,7 +150,45 @@ function buildBooksDatabase() {
   return books;
 }
 
+function buildBackAccountDataBase() {
+  const numberOfAccount = getRandomInt(1, 20);
+  const accounts = [];
+
+  for (let i = 0; i < numberOfAccount; i++) {
+    let fakeAccount = {
+      accountNumber: faker.finance.account(),
+      name: faker.name.findName(),
+      accountName: faker.finance.accountName(),
+      balance: faker.finance.amount(),
+    };
+    accounts.push(fakeAccount);
+  }
+
+  return accounts;
+}
+
+function buildTransactionDataBase(accountNumberList) {
+  const transactions = [];
+  for (const account of accountNumberList) {
+    const numberOfTransaction = getRandomInt(0, 5);
+    for (let i = 0; i < numberOfTransaction; i++) {
+      let transaction = {
+        transactionId: faker.datatype.uuid(),
+        date: faker.date.past(),
+        accountNumber: account.accountnumber,
+        transactionType: faker.finance.transactionType(),
+        amount: faker.finance.amount(),
+        paymentAccountNumber: faker.finance.account(),
+      };
+      transactions.push(transaction);
+    }
+  }
+  return transactions;
+}
+
 module.exports = {
   buildBooksDatabase,
-  buildAnimalDatabase
+  buildAnimalDatabase,
+  buildBackAccountDataBase,
+  buildTransactionDataBase,
 };

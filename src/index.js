@@ -8,6 +8,8 @@ const Pet = require("./resources/pets/model");
 /* IMPORT ROUTERS */
 const bookRouter = require("./resources/books/router");
 const petRouter = require("./resources/pets/router");
+const bankAcRouter = require("./resources/bankAccounts/router");
+const transactionRouter = require("./resources/transcations/router");
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.use(express.json());
 /* SETUP ROUTES */
 app.use("/books", bookRouter);
 app.use("/pets", petRouter);
+app.use("/bankAccounts", bankAcRouter);
+app.use("/transactions", transactionRouter);
 
 /* CATCH-ALL TO TEST ROUTES */
 
