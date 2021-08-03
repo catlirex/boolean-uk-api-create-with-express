@@ -9,7 +9,7 @@ const Pet = require("./resources/pets/model");
 const bookRouter = require("./resources/books/router");
 const petRouter = require("./resources/pets/router");
 const bankAcRouter = require("./resources/bankAccounts/router");
-const transactionRouter = require("./resources/transcations/router");
+const transactionRouter = require("./resources/transactions/router");
 
 const app = express();
 
